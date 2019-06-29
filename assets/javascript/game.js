@@ -8,7 +8,7 @@ var chosenWord = [];
 //---------------ON PAGE LOAD---------------//
 
 function beginGame() {
-    alert("Press a key to guess the word!");
+    //alert("Press a key to guess the word!");
 
 
 //Computer auto picks a random word from array
@@ -17,6 +17,7 @@ var chosenWord = superheroNames[randomInt];
     console.log(chosenWord);
 
 //Display chosenWord on "current-word-text"
+var chosenWord = document.getElementById("current-word-text").innerHTML = chosenWord;
 
 
 
