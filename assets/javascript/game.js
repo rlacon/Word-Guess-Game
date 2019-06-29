@@ -1,5 +1,6 @@
 var wins = 0;
 var guessesRemaining = 10;
+const startingGuessCount = 10; 
 var lettersGuessed = [];
 
 var superheroNames = ["Superman", "Batman", "Deadpool", "Spiderman", "Thor", "Hulk"];
@@ -10,12 +11,19 @@ var chosenWordLength = 0; //We need to know that this element is going to be a n
 var chosenWordUnderscores = [];
 
 function beginGame() {
+    console.log("Starting a new game!");
     // Generate guesses remaining html element  
-    document.getElementById("guesses-remaining-text").textContent = guessesRemaining;
+    document.getElementById("guesses-remaining-text").textContent = startingGuessCount;
+    document.getElementById("wins-text").textContent = wins;
+
+    // Reset letterGuessed 
+    lettersGuessed = [];
+    chosenWordUnderscores = [];
+    document.getElementById("letters-guessed-text").textContent = chosenWordUnderscores;
     //Computer auto picks a random word from array
     var randomInt = Math.floor(Math.random() * superheroNames.length);
     chosenWord = superheroNames[randomInt].toLowerCase();
-    console.log(chosenWord);
+    console.log("Chosen word " + chosenWord);
 
     // When there is only one string in an array, each letter is counted as a string element.
     chosenWordLength = chosenWord.length;
@@ -36,13 +44,13 @@ function beginGame() {
 document.onkeyup = function (event) {
     var userGuess = event.key;
     console.log(userGuess);
-    lettersGuessed.push(userGuess); 
+    lettersGuessed.push(userGuess);
     // lettersGuessed is the array that holds onto all letters guessed in the game.
     // The empty parantheses makes it so that the code before the equal sign fills in the space of the string that's chosen from lettersGuessed.
     document.getElementById("letters-guessed-text").textContent = lettersGuessed.join(" ");
 
     // The letter the user has pressed doesnt exist in the word we've chosen.
-    var letterExists = false; 
+    var letterExists = false;
     // Iterates over chosenWord letter by letter
     // chosenWord = Batman
     // guess = m
@@ -56,51 +64,60 @@ document.onkeyup = function (event) {
     // guessRemaing
 
     for (var i = 0; i < chosenWordLength; i++) {
-        if ( chosenWord[i] === userGuess ) {
+        if (chosenWord[i] === userGuess) {
             // What needs to happen when a letter is guessed correctly?
             // Set letterExists
-            letterExists = true; 
+            letterExists = true;
             console.log(letterExists);
             // Change the appropriate underscore character to the userGuess letter
             chosenWordUnderscores[i] = userGuess; // (e.g. If the word has 5 letters, then chosenWord[0] is the same as chosendWordUnderScores[0], because that's the first thing it understands in the word.
-        } 
+        }
         document.getElementById("current-word-text").textContent = chosenWordUnderscores.join(" ");
     } // End of for loop
     // Check if we found the letter 
     // If we did not update guessesRemaining variable
     //! is another way of saying "Not true"
-    if(!letterExists){
-        guessesRemaining--;
+    if (!letterExists) {
+        guessesRemaining--; // guessesRemaining = guessesRemaining + 1
         console.log(guessesRemaining);
         document.getElementById("guesses-remaining-text").textContent = guessesRemaining;
+        // Check if user lost
+        if (guessesRemaining === 0) {
+            beginGame();
+        }
     }
-    
 
 
 
- // if (condition){
-        //     // Gets run only if condition is true
-        // }
-        // // This runs no matter what
 
-        // if (condition){
-        //     // Only runs if condition is true
-        // }else {
-        //     // Runs only when condition is false
-        // } 
-        // // This runs no matter what
+    // if (condition){
+    //     // Gets run only if condition is true
+    // }
+    // // This runs no matter what
 
-        // if (condition){
-        //     // Only runs if condition is true
-        // }else if (condition){
-        //     // Only runs if else condition is true
-        // } else if (condition){
-        //     // Only runs if else condition is true
-        // }
-        // // This runs no matter what
+    // if (condition){
+    //     // Only runs if condition is true
+    // }else {
+    //     // Runs only when condition is false
+    // } 
+    // // This runs no matter what
+
+    // if (condition){
+    //     // Only runs if condition is true
+    // }else if (condition){
+    //     // Only runs if else condition is true
+    // } else if (condition){
+    //     // Only runs if else condition is true
+    // }
+    // // This runs no matter what
 
 
-}; //Take this letter, check it against our word, and ask if this letter exist (will be an if else statement, with a for loop nested inside of it. Or a for, with an if inside the for (like RPS))
+}; 
+
+
+
+
+//Take this letter, check it against our word, and ask if this letter exist (will be an if else statement, with a for loop nested inside of it. Or a for, with an if inside the for (like RPS))
 
 
 
