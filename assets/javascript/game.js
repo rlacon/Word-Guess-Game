@@ -3,7 +3,7 @@ var guessesRemaining = 10;
 var lettersGuessed = [];
 
 var superheroNames = ["Superman", "Batman", "Deadpool", "Spiderman", "Thor", "Hulk"];
-var chosenWord = "";
+var chosenWord = ""; //String is also an array of character e.g. chosenWord[1]
 
 //---------------ON PAGE LOAD---------------//
 var chosenWordLength = 0; //We need to know that this element is going to be a number for when it generates an ID from a string element later on.
@@ -35,29 +35,26 @@ function beginGame() {
 document.onkeyup = function (event) {
     var userGuess = event.key;
     console.log(userGuess);
-    lettersGuessed.push(userGuess); // lettersGuessed will be the array that holds onto everything in the game.
+    lettersGuessed.push(userGuess); 
+    // lettersGuessed is the array that holds onto all letters guessed in the game.
     // The empty parantheses makes it so that the code before the equal sign fills in the space of the string that's chosen from lettersGuessed.
     document.getElementById("letters-guessed-text").textContent = lettersGuessed.join(" ");
 
     // The letter the user has pressed doesnt exist in the word we've chosen.
     var letterExists = false; 
     for (var i = 0; i < chosenWordLength; i++) {
-        if (chosenWord[i] === userGuess) {
-            letterExists = true;
+        if ( chosenWord[i] === userGuess ) {
+            // What needs to happen when a letter is guessed correctly?
+            // Set letterExists
+            letterExists = true; 
             console.log(letterExists);
-        }
-    }
-
-    // Change underscores back to the correct word.
-    if (letterExists) {
-        for (var j = 0; j < chosenWordLength; j++) { // We use j so that JS understands this is a different loop from the one before it.
-            if (chosenWord[j] === userGuess) {
-                chosenWordUnderscores[j] = userGuess; // (e.g. If the word has 5 letters, then chosenWord[0] is the same as chosendWordUnderScores[0], because that's the first thing it understands in the word.
-            }
+            // Change the appropriate underscore character to the userGuess letter
+            chosenWordUnderscores[i] = userGuess; // (e.g. If the word has 5 letters, then chosenWord[0] is the same as chosendWordUnderScores[0], because that's the first thing it understands in the word.
         } document.getElementById("current-word-text").textContent = chosenWordUnderscores.join(" ");
     }
 
-}; //tahek this letter, check it against our word, and ask if this letter exist (will be an if else statement, with a for loop nested inside of it. Or a for, with an if inside the for (like RPS))
+
+}; //Take this letter, check it against our word, and ask if this letter exist (will be an if else statement, with a for loop nested inside of it. Or a for, with an if inside the for (like RPS))
 
 
 
