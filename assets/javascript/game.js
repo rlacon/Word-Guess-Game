@@ -6,7 +6,7 @@ var superheroNames = ["Superman", "Batman", "Deadpool", "Spiderman", "Thor", "Hu
 var chosenWord = "";
 
 //---------------ON PAGE LOAD---------------//
-var chosenWordLength = 0;//we need to know that this is going to be a number for when it pulls a string element later on 
+var chosenWordLength = 0; //We need to know that this element is going to be a number for when it generates an ID from a string element later on.
 var chosenWordUnderscores = [];
 
 function beginGame() {
@@ -16,36 +16,31 @@ function beginGame() {
     chosenWord = superheroNames[randomInt].toLowerCase();
     console.log(chosenWord);
 
-    //Display chosenWord on "current-word-text"
-    //document.getElementById("current-word-text").innerHTML = chosenWord;
-
-    // When there is only one string, it counts each letter as a string element
+    // When there is only one string in an array, each letter is counted as a string element.
     chosenWordLength = chosenWord.length;
 
-
-
-
-    //Replace each string element of chosenWord with Underscores 
-    //chosenWord = document.body.innerHTML.replace('_');
-
+    //For each string element in chosenWord, add and replace with underscores.
     for (var i = 0; i < chosenWordLength; i++) {
         chosenWordUnderscores.push("_");
-
     }
+
+    //Log results and combine new elements to display on the screen. 
     console.log(chosenWordUnderscores);
-    document.getElementById("current-word-text").textContent = chosenWordUnderscores.join(" "); //join is a function that literally takes the string elements in the array to show each element in the array as an individual, remove the spaces and push everything in the array to make it one thing.
+    document.getElementById("current-word-text").textContent = chosenWordUnderscores.join(" "); // Takes the string elements in the array and show each one as an individual value, removes the spaces, and pushes everything in the array to make it one word.
 };
+
 //---------------GAME BEGINS HERE---------------//
 
-// The user presses a key to make a guess
+// Press a key to make a guess
 document.onkeyup = function (event) {
     var userGuess = event.key;
     console.log(userGuess);
-    lettersGuessed.push(userGuess);
-    //Lettersgguessed will be the array that holds onto everything
-    //The empty parantheses makes it so that the content before the equal sign becomes filled in that space, which then displays on the screen without quotes on it
-    document.getElementById("letters-guessed-text").textContent = lettersGuessed.join(" "); //join is a function that literally takes the string elements in the array to show each element in the array as an individual, remove the spaces and push everything in the array to make it one thing.
-    var letterExists = false; //we are assuming that the letter the user presses doesnt exist in the word we've chosen.
+    lettersGuessed.push(userGuess); // lettersGuessed will be the array that holds onto everything in the game.
+    // The empty parantheses makes it so that the code before the equal sign fills in the space of the string that's chosen from lettersGuessed.
+    document.getElementById("letters-guessed-text").textContent = lettersGuessed.join(" ");
+
+    // The letter the user has pressed doesnt exist in the word we've chosen.
+    var letterExists = false; 
     for (var i = 0; i < chosenWordLength; i++) {
         if (chosenWord[i] === userGuess) {
             letterExists = true;
@@ -53,12 +48,11 @@ document.onkeyup = function (event) {
         }
     }
 
-    //change underscores to the correct chosen word 
-    // use j so that javasript understands that this is a different loop from the one before it
+    // Change underscores back to the correct word.
     if (letterExists) {
-        for (var j = 0; j < chosenWordLength; j++) {
+        for (var j = 0; j < chosenWordLength; j++) { // We use j so that JS understands this is a different loop from the one before it.
             if (chosenWord[j] === userGuess) {
-                chosenWordUnderscores[j] = userGuess; //If the word has 5 letters, then chosenword[0] is the same thing as chosendWordUnderScore[0] because that's the first thing it understands in the word
+                chosenWordUnderscores[j] = userGuess; // (e.g. If the word has 5 letters, then chosenWord[0] is the same as chosendWordUnderScores[0], because that's the first thing it understands in the word.
             }
         } document.getElementById("current-word-text").textContent = chosenWordUnderscores.join(" ");
     }
@@ -66,7 +60,6 @@ document.onkeyup = function (event) {
 }; //tahek this letter, check it against our word, and ask if this letter exist (will be an if else statement, with a for loop nested inside of it. Or a for, with an if inside the for (like RPS))
 
 
-//If key pressed matches string element of chosenWord, replace underscore with word
 
 //If key pressed doesn't match, decrease number of guesses by -1
 
@@ -74,6 +67,10 @@ document.onkeyup = function (event) {
 
 
 //---------------LOSE GAME---------------//
+
+//If key pressed doesn't match, decrease number of guesses by -1
+
+    //Add letter to "letters-guessed-text" 
 
 //When guessesRemaining = 0, display alert message "You Lose!" 
 
