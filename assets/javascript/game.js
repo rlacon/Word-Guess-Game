@@ -1,9 +1,9 @@
 var wins = 0;
 var guessesRemaining = 10;
+var lettersGuessed = [];
 
 var superheroNames = ["Superman", "Batman", "Deadpool", "Spiderman", "Thor", "Hulk"];
 var chosenWord = [];
-var lettersGuessed = [];
 
 //---------------ON PAGE LOAD---------------//
 
@@ -12,18 +12,19 @@ function beginGame() {
 
 
 //Computer auto picks a random word from array
-var chosenWord = Math.floor(Math.random() * superheroNames.length);
+var randomInt = Math.floor(Math.random() * superheroNames.length);
+var chosenWord = superheroNames[randomInt];
     console.log(chosenWord);
 
-//Display word on screen
-
-
+//Display chosenWord on "current-word-text"
 
 
 
 //Replace each string element of chosenWord with underscores 
-for (var i = 0; i <= superheroNames.length; i++) {
+for (var i = 0; i <= chosenWord.length; i++) {
+    
 }
+
 
 };
 //---------------GAME BEGINS HERE---------------//
@@ -41,7 +42,6 @@ document.onkeyup = function (event) {
     //Add letter to "letters-guessed-text" 
 
 
-
 //---------------LOSE GAME---------------//
 
 //When guessesRemaining = 0, display alert message "You Lose!" 
@@ -49,7 +49,6 @@ document.onkeyup = function (event) {
     //Reset guesses-remaining-text and letters-guessed-text
 
     //Computer chooses new word from array
-
 
 
 //---------------WIN GAME---------------//
