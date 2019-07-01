@@ -5,12 +5,15 @@ const startingGuessCount = 10;
 var lettersGuessed = [];
 
 var superheroNames = ["Superman", "Batman", "Deadpool", "Spiderman", "Thor", "Hulk"];
-var chosenWord = ""; //String is also an array of character e.g. chosenWord[1]
+
+//String is also an array of characters (e.g. chosenWord[1] will be "h")
+var chosenWord = ""; 
+
+//We need to know that this element is going to be a number for when it generates an ID from a string element later on.
+var chosenWordLength = 0; 
+var chosenWordUnderscores = [];
 
 //---------------ON PAGE LOAD---------------//
-
-var chosenWordLength = 0; //We need to know that this element is going to be a number for when it generates an ID from a string element later on.
-var chosenWordUnderscores = [];
 
 function beginGame() {
     console.log("Starting a new game!");
@@ -21,6 +24,9 @@ function beginGame() {
 
     // Reset success count
     successfulGuesses = 0;
+    // Reset Guesses Remaining
+    guessesRemaining = startingGuessCount;
+
     // Reset letterGuessed 
     lettersGuessed = [];
     // Reset chosenWordUnderscores both in javascript and HTML
@@ -54,7 +60,9 @@ document.onkeyup = function (event) {
 
     // lettersGuessed holds onto all letters guessed in the game.
     lettersGuessed.push(userGuess);
-
+    if(!lettersGuessed.includes(userGuess)){
+        lettersGuessed.push(userGuess);
+      }
     // The empty parantheses makes it so that the code before the equal sign fills in the space of the string that's chosen from lettersGuessed.
     document.getElementById("letters-guessed-text").textContent = lettersGuessed.join(" ");
 
@@ -80,7 +88,7 @@ document.onkeyup = function (event) {
     // If we did not, update guessesRemaining variable
     // (! is another way of saying "Not true")
     if (!letterExists) {
-        guessesRemaining--; // guessesRemaining = guessesRemaining + 1
+        guessesRemaining--;
         console.log(guessesRemaining);
         document.getElementById("guesses-remaining-text").textContent = guessesRemaining;
         // Check if user lost
@@ -88,7 +96,7 @@ document.onkeyup = function (event) {
             beginGame();
         }
 
-        //---------------WIN GAME---------------//
+    //---------------WIN GAME---------------//
 
     } else {
         // Letter found!
@@ -96,14 +104,15 @@ document.onkeyup = function (event) {
         successfulGuesses++;
         // Check if they won the game
         if (successfulGuesses === chosenWordLength) {
-            // Increase win count
+            // Increase win count and reset
             wins++;
+            alert("You win!");
             beginGame();
         }
     }
 };
 
-//If else condition rules
+    //---------------IF ELSE CONDITION RULES---------------//
 
     // if (condition){
     //     // Gets run only if condition is true
